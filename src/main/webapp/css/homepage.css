@@ -1,0 +1,46 @@
+@charset "ISO-8859-1";
+.header {
+	padding: 10px;
+	text-align: center;
+	font-family: verdana;
+	color: white;
+	background-color: green;
+}
+
+.container-section {
+	background-color: #ebffec;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.login-form {
+	padding: 20px;
+	border: 1px solid #555555;
+	margin: 50px;
+	box-shadow: 6px 6px #aaaaaa;
+}
+
+.form-element {
+	font-size: 16px;
+}
+
+.form-control {
+	padding: 23px;
+}
+
+.sidecontent {
+	color: #4f4645;
+	text-align: center;
+	padding: 55px;
+	font-family: cursive;
+	line-height: 3;
+}
+
+.footer {
+	padding: 10px;
+	text-align: center;
+	font-family: verdana;
+	color: white;
+	background-color: green;
+}

@@ -1,0 +1,35 @@
+@charset "ISO-8859-1";
+body{
+	overflow-x:hidden;
+}
+#site-management {
+	color: white;
+}
+
+.content {
+	padding-top: 50px;
+	height: 480px;
+}
+
+th {
+	background-color: green;
+	color: white;
+}
+
+#site-management-main-form, #add-domain-form, #add-department-form,
+	#add-designation-form {
+	padding-left: 25%;
+	padding-right: 25%;
+}
+
+#update-domain-form, #update-department-form, #update-designation-form, #add-user-level-form {
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.page-header {
+	text-align: center;
+	margin-top: 20px;
+	font-size: verdana;
+	color: red;
+}

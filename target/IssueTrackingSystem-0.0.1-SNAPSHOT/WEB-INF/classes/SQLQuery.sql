@@ -1,0 +1,1 @@
+SELECT * FROM [ITS].[tbl_Authority]

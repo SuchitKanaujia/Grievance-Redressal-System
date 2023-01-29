@@ -1,0 +1,11 @@
+User_ID,password,Name,User_Level,Email_id,contact_no,Room_no,Gender,Date_Of_joining,Passing_Year,Domain,Designation,Department_ID/Branch_ID
+10036,0000,A,1,a@xyz.com,7866564809,,M,25 February 2019,NA,NA,CTS_Head,CTS
+10056,0000,B,2,b@xyz.com,7827652985,,M,02 February 2019,NA,NA,VC,MGT
+10067,0000,C,3,c@xyz.com,7788741161,,M,25 February 2017,NA,NA,Chief-Warden,BUS
+10090,0000,D,4,d@xyz.com,7749829337,,M,09 April 2018,NA,NA,NA,NA
+17BCE10097,0000,E,5,e@xyz.com,7710917513,128,M,NA,11-08-2017,,NA,CSE
+10037,0000,M,1,m@xyz.com,7672005689,,M,25 February 2019,NA,NA,Senior_Engineer,CTS
+10057,0000,N,2,n@xyz.com,7633093865,,F,25 February 2019,NA,NA,DSW,ELE
+10068,0000,O,3,o@xyz.com,7594182041,,M,25 February 2019,NA,NA,Deputy-Warden,BIO
+10091,0000,P,4,p@xyz.com,7555270217,,M,25 February 2019,NA,NA,NA,NA
+17BCE10098,0000,Q,5,q@xyz.com,7516358393,147,M,NA,11-08-2017,,NA,MEE
