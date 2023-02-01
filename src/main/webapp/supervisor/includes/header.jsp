@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	import="core.globals.*, java.util.*, core.beans.*, core.dao.*"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -46,10 +47,9 @@
 }
 
 .header-welcome {
-	line-height: 1;
-	font-size: 15px;
+	line-height: auto;
+	font-size: 20px;
 	font-family: cursive;
-	font-size: 15px;
 	color: white;
 	float: left;
 }
@@ -92,18 +92,24 @@
 </head>
 <body>
 	<div class="row header-row">
-		<div class="col-sm-4 header-info">
+		<div class="col-sm-8 header-info">
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-2">
 					<img src="../images/dummyImage.jpg" class="header-image"
 						alt="Dummy Image" height="30px" style="border-radius: 10px;">
 				</div>
-				<div class="col-sm-6">
-					<p class="header-welcome">Welcome Mr. XYZ</p>
+				<div class="col-sm-10">
+					<p class="header-welcome">
+						Welcome
+						<%
+					String uName = UserDetails.userName;
+					String domainName = " (Supervisor: " + Dimensions.domainMap.get(UserDetails.supervisor.getDomainId()).getName() + ")";
+					out.print(uName + domainName);
+					%>
+					</p>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-4"></div>
 		<div class="col-sm-4">
 			<div class="row header-buttons-container">
 				<div class="col-sm-6">

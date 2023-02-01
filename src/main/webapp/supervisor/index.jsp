@@ -11,7 +11,7 @@
 <style>
 .content {
 	margin-top: 20px;
-	padding-bottom: 20px;
+	padding: 0px 20px 20px 20px;
 }
 
 .side-bar-issue {
@@ -19,6 +19,8 @@
 	border-radius: 40px;
 	line-height: 3;
 	padding: 30px;
+	margin-left: 130px;
+	margin-right: 30px;
 	margin-top: 60px;
 }
 
@@ -35,78 +37,63 @@ th {
 <body>
 	<!-- Including Navigation Bar -->
 	<%@include file="includes/navbar.jsp"%>
-	
+
 	<!-- Including Header -->
 	<%@include file="includes/header.jsp"%>
 
 	<!-- header closed -->
 	<!--  content start -->
-	<div class="container content">
+	<div class="content">
 		<div class="row">
 			<div class="col-md-8 col-lg-8">
-				<h2>Issue Reports</h2>
+				<h2>Active Issues</h2>
 
 				<div class="table-responsive">
 					<table class="table  table-hover table-bordered">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>ComplaintID</th>
+								<th>ID</th>
 								<th>Description</th>
+								<th>Date of Reg</th>
 								<th>Status</th>
+								<th>Student Id</th>
+								<th>Student Name</th>
+
 
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>ELC0001</td>
-								<td>Some info...</td>
-								<td>In Process</td>
-
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>HYG0001</td>
-								<td>Some info...</td>
-								<td>Closed</td>
-
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>RRM0001</td>
-								<td>Some info...</td>
-								<td>Completed</td>
-
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>MSS0001</td>
-								<td>Some info...</td>
-								<td>In Process</td>
-
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>MSS0002</td>
-								<td>Some info...</td>
-								<td>Cancelled</td>
-
-							</tr>
-							<tr>
-								<td>6</td>
-								<td>ELC0003</td>
-								<td>Some info...</td>
-								<td>Completed</td>
-
-							</tr>
-							<tr>
-								<td>7</td>
-								<td>MSS0002</td>
-								<td>Some info...</td>
-								<td>In Process</td>
-
-							</tr>
+							<%
+							String uid = UserDetails.userId;
+							ArrayList<Issue> issues = IssueDAO.fetchIssues("[Assigned_To] = '" + uid + "' AND [Curr_Status]<4");
+							int index = 0;
+							ArrayList<String> studentIds = new ArrayList<String>();
+							for (Issue issue : issues) {
+								studentIds.add(issue.getRegistered_By());
+							}
+							HashMap<String, String> nameHash = StudentDAO.fetchNames(studentIds);
+							int totalSolvedIssues = 0;
+							int todatRegisteredIssues = 0;
+							for (Issue issue : issues) {
+								int id = issue.getId();
+								String description = issue.getDescription();
+								String status = Dimensions.statusMap.get(issue.getCurr_Status()).getName();
+								String time = issue.getRegTime().toString().substring(0, 10);
+								//String time = "ddmmyyyy";
+								out.print("<tr> <th>" + index + 1 + "</th> <td>" + id + "</td> <td>" + description + "</td> <td> " + time
+								+ " </td> <td>" + status + "</td> <td>" + studentIds.get(index) + "</td> <td>"
+								+ nameHash.get(studentIds.get(index)) + "</td> </tr>");
+								
+								if (issue.getCurr_Status() == 4){
+									totalSolvedIssues ++;
+								}
+								if (issue.getCurr_Status() < 5){
+									todatRegisteredIssues ++;
+								}
+								index++;
+							}
+							%>
 						</tbody>
 					</table>
 				</div>
@@ -114,10 +101,12 @@ th {
 			<div class="col-md-4 col-lg-4">
 				<div class="side-bar-issue">
 					<p>
-						<b> Total Solved Issues :</b> #data
+						<b> Total Solved Issues :</b>
+						<%=totalSolvedIssues %>
 					</p>
 					<p>
-						<b> Today Registered Issues :</b> #data
+						<b> Today Registered Issues :</b>
+						<%= todatRegisteredIssues %>
 					</p>
 				</div>
 			</div>

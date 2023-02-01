@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+body {
+	background-color: #ebffec;
+}
+
+.content {
+	margin-top: 20px;
+	height: 483px;
+}
+
+.container-flex {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.input-box {
+	padding: 20px;
+	border: 1px solid #555555;
+	margin: 50px;
+	box-shadow: 6px 6px #aaaaaa;
+}
+
+#register-an-issue {
+	color: white;
+}

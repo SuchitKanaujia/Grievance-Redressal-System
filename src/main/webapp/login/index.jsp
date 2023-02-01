@@ -1,4 +1,4 @@
-<%@page import="its.login.LoginObject"%>
+<%@page import="core.globals.*, core.app.LoginModule, core.beans.UserLevel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -10,24 +10,30 @@
 <body>
 	<h5>
 		<%
-			String uname = request.getParameter("username");
-			String pwd = request.getParameter("password");
+			String userName = request.getParameter("username");
+			String password = request.getParameter("password");
+			String userLevel = request.getParameter("user-level");
 			try {
-				its.login.LoginObject loginObj = new its.login.LoginObject();
-				its.login.LoginMethods loginMethods = new its.login.LoginMethods();
-				loginObj = loginMethods.getLoginDetails(uname, pwd);
-				if (loginObj.getUSERTYPE() == null || loginObj.getUSERTYPE().isEmpty())
+				UserLevel userLevelObj =  Dimensions.userLevelMap.get(Integer.parseInt(userLevel));
+				if(LoginModule.approveLogin(userLevelObj, userName, password)){
+					switch(userLevelObj.getId()){
+					case 2:
+						response.sendRedirect("../warden/");
+						break;
+					case 3:
+						response.sendRedirect("../supervisor/");
+						break;
+					case 4:
+						response.sendRedirect("../student/");
+						break;
+					case 5:
+						response.sendRedirect("../admin/");
+						break;
+					}
+				}
+				else{
 					response.sendRedirect("wrongCredentials.jsp");
-				else if (loginObj.getUSERTYPE().equals("ADM"))
-					response.sendRedirect("../admin/");
-				else if (loginObj.getUSERTYPE().equals("WAR"))
-					response.sendRedirect("../warden/");
-				else if (loginObj.getUSERTYPE().equals("SUP"))
-					response.sendRedirect("../supervisor/");
-				else if (loginObj.getUSERTYPE().equals("STU"))
-					response.sendRedirect("../student/");
-				else
-					response.sendRedirect("wrongCredentials.jsp");
+				}
 			} catch (Exception ex) {
 				System.out.println(ex);
 			}

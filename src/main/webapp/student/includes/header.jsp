@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java"
+	import="core.globals.*"
+	contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +100,7 @@
 						alt="Dummy Image" height="30px" style="border-radius: 10px;">
 				</div>
 				<div class="col-sm-6">
-					<p class="header-welcome">Welcome Mr. XYZ</p>
+					<p class="header-welcome">Welcome <%= UserDetails.userName %> </p>
 				</div>
 			</div>
 		</div>

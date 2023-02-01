@@ -1,4 +1,9 @@
 @charset "ISO-8859-1";
+
+body {
+	background-color: #ebffec;
+}
+
 .header {
 	padding: 10px;
 	text-align: center;
@@ -8,9 +13,9 @@
 }
 
 .container-section {
-	background-color: #ebffec;
-	margin: 0;
-	padding: 0;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: stretch;
 	overflow: hidden;
 }
 
@@ -23,10 +28,6 @@
 
 .form-element {
 	font-size: 16px;
-}
-
-.form-control {
-	padding: 23px;
 }
 
 .sidecontent {
@@ -43,4 +44,7 @@
 	font-family: verdana;
 	color: white;
 	background-color: green;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
 }

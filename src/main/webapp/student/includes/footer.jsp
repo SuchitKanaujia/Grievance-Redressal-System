@@ -13,12 +13,15 @@
 	font-family: verdana;
 	color: white;
 	background-color: green;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
 }
 </style>
 </head>
 <body>
 <div class="footer">
-<p>&copy; 2018 Issue Tracking System</p>
+<p>&copy; 2023 Grievances Redressal System</p>
 </div>
 </body>
 </html>

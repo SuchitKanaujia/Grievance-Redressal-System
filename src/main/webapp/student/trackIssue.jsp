@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+import="core.beans.*, core.dao.*, core.globals.*, java.util.ArrayList"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -42,21 +43,21 @@ body {
 				<form class="form-inline active-purple-4">
 					<input class="form-control form-control-sm mr-3 w-75" type="text"
 						placeholder="Search by complaint ID" aria-label="Search">
-					<button type="" submit" class="btn btn-sm btn-info">Search</button>
+					<button type="button" class="btn btn-sm btn-info">Search</button>
 				</form>
 			</div>
 			<div class="col-md-4">
 				<form class="form-inline active-purple-4">
 					<input class="form-control form-control-sm mr-3 w-75" type="text"
 						placeholder="Search by date of registration" aria-label="Search">
-					<button type="" submit" class="btn btn-sm btn-info">Search</button>
+					<button type="button" class="btn btn-sm btn-info">Search</button>
 				</form>
 			</div>
 			<div class="col-md-4">
 				<form class="form-inline active-purple-4">
 					<input class="form-control form-control-sm mr-3 w-75" type="text"
 						placeholder="Search by domain" aria-label="Search">
-					<button type="" submit" class="btn btn-sm btn-info">Search</button>
+					<button type="button" class="btn btn-sm btn-info">Search</button>
 				</form>
 			</div>
 		</div>
@@ -82,61 +83,19 @@ body {
 					</thead>
 
 					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>...</td>
-							<td>...</td>
-							<td>...</td>
-							<td>...</td>
-							<td>
-								<button type="button"
-									class="btn btn-teal btn-rounded btn-md m-0">More</button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>...</td>
-							<td>...</td>
-							<td>...</td>
-							<td>...</td>
-							<td>
-								<button type="button"
-									class="btn btn-teal btn-rounded btn-md m-0">More</button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>...</td>
-							<td>...</td>
-							<td>...</td>
-							<td>...</td>
-							<td>
-								<button type="button"
-									class="btn btn-teal btn-rounded btn-md m-0">More</button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">4</th>
-							<td>...</td>
-							<td>...</td>
-							<td>...</td>
-							<td>...</td>
-							<td>
-								<button type="button"
-									class="btn btn-teal btn-rounded btn-md m-0">More</button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">5</th>
-							<td>...</td>
-							<td>...</td>
-							<td>...</td>
-							<td>...</td>
-							<td>
-								<button type="button"
-									class="btn btn-teal btn-rounded btn-md m-0">More</button>
-							</td>
-						</tr>
+					<% String uid = UserDetails.userId;
+					ArrayList<Issue> issues = IssueDAO.fetchIssues("[Registered_By] = '" + uid + "'");
+					for (Issue issue: issues) {
+						int id = issue.getId();
+						String domainName = Dimensions.domainMap.get(issue.getDomain_Id()).getName();
+						String description = issue.getDescription();
+						String status = Dimensions.statusMap.get(issue.getCurr_Status()).getName();
+						out.print("<tr> <th>" + id + "</th> <td>" + domainName + "</td> <td>" + description + "</td> <td> DD/MM/YYYY </td> <td>"
+						+ status + "</td> <td><button type=\"button\" class=\" btn btn-teal btn-rounded btn-md m-0\">More</button></td> </tr>");
+						
+					}
+					%>
+					
 					</tbody>
 				</table>
 			</div>

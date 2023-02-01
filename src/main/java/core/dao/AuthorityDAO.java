@@ -19,13 +19,13 @@ public class AuthorityDAO {
 			ArrayList<String> selectedColumns = new ArrayList<>(Arrays.asList
 					("Emp_Id", "First_Name", "Mid_Name", "Last_Name", "DOB", "Gender", "Blood_Grp", "Email", "Email_2",
 					 "Contact", "Contact_2", "Qualification", "DOJ", "Password", "Profile_Pic", "User_Level"));
-			String selectQuery = (whereClause.equals("")) ? SQLQueries.generateSelectQuery("tbl_Admin", selectedColumns) : 
-				SQLQueries.generateSelectQuery("tbl_Admin", selectedColumns, whereClause);
+			String selectQuery = (whereClause.equals("")) ? SQLQueries.generateSelectQuery("tbl_Authority", selectedColumns) : 
+				SQLQueries.generateSelectQuery("tbl_Authority", selectedColumns, whereClause);
 			PreparedStatement ps = connection.prepareStatement(selectQuery);
 			ResultSet rs = ps.executeQuery();
 			if(!rs.isBeforeFirst())
 			{
-				System.out.println("No Admins Available!");
+				System.out.println("No Authorities Available!");
 			}
 			while(rs.next())
 			{

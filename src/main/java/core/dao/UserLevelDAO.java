@@ -14,7 +14,7 @@ import helper.sql.SQLQueries;
 
 public class UserLevelDAO {
 	
-	public static ArrayList<UserLevel> fetchIssues(String whereClause){
+	public static ArrayList<UserLevel> fetchUserLevels(String whereClause){
 		ArrayList<UserLevel> allUserLevels = new ArrayList<UserLevel>();
 		try {
 			Connection connection = SQLConnection.getAzureDBConnection();
@@ -32,11 +32,9 @@ public class UserLevelDAO {
 			{
 				UserLevel record = new UserLevel();
 				record.setId(rs.getInt(1));
-				record.setRegistered_By(rs.getString(2));
-				record.setDomain_Id(rs.getString(3));
-				record.setDescription(rs.getString(4));
-				record.setCurr_Status(rs.getInt(5));
-				record.setAssigned_To(rs.getString(6));
+				record.setUserLevel(rs.getString(2));
+				record.setAccessPermissions(rs.getString(3));
+				
 				allUserLevels.add(record);
 			}
 			
@@ -51,19 +49,17 @@ public class UserLevelDAO {
 	}
 	
 	
-	public static boolean insertIssue(UserLevel issue){
+	public static boolean insertUserLevel(UserLevel lvl){
 		try {
 			Connection connection = SQLConnection.getAzureDBConnection();
 			HashMap<String, GenericType> toInsert = new HashMap<String, GenericType>();
 			
-			if (issue.getId() != 0) toInsert.put("Id", new GenericType(issue.getId()));
-			if (issue.getRegistered_By() != null) toInsert.put("Registered_By", new GenericType("'" + issue.getRegistered_By()+ "'"));
-			if (issue.getDomain_Id() != null) toInsert.put("Domain_Id", new GenericType("'" + issue.getDomain_Id()+ "'"));
-			if (issue.getDescription() != null) toInsert.put("Description", new GenericType("'" + issue.getDescription()+ "'"));
-			if (issue.getCurr_Status() != 0) toInsert.put("Curr_Status", new GenericType(issue.getCurr_Status()));
-			if (issue.getAssigned_To() != null) toInsert.put("Assigned_To", new GenericType("'" + issue.getAssigned_To()+ "'"));
+			if (lvl.getId() != 0) toInsert.put("Id", new GenericType(lvl.getId()));
+			if (lvl.getUserLevel() != null) toInsert.put("Registered_By", new GenericType("'" + lvl.getUserLevel()+ "'"));
+			if (lvl.getAccessPermissions() != null) toInsert.put("Domain_Id", new GenericType("'" + lvl.getAccessPermissions()+ "'"));
 			
-			String insertQuery = SQLQueries.generateInsertQuery("tbl_Issue", toInsert);
+			
+			String insertQuery = SQLQueries.generateInsertQuery("tbl_User_Level", toInsert);
 			PreparedStatement ps = connection.prepareStatement(insertQuery);
 			int status = ps.executeUpdate();
 			System.out.println(status);
@@ -84,18 +80,16 @@ public class UserLevelDAO {
 	}
 	
 	
-	public static boolean updateIssue(UserLevel issue){
+	public static boolean updateUserLevel(UserLevel lvl){
 		try {
 			Connection connection = SQLConnection.getAzureDBConnection();
 			HashMap<String, GenericType> toUpdate = new HashMap<String, GenericType>();
 			
-			if (issue.getRegistered_By() != null) toUpdate.put("Registered_By", new GenericType("'" + issue.getRegistered_By()+ "'"));
-			if (issue.getDomain_Id() != null) toUpdate.put("Domain_Id", new GenericType("'" + issue.getDomain_Id()+ "'"));
-			if (issue.getDescription() != null) toUpdate.put("Description", new GenericType("'" + issue.getDescription()+ "'"));
-			if (issue.getCurr_Status() != 0) toUpdate.put("Curr_Status", new GenericType(issue.getCurr_Status()));
-			if (issue.getAssigned_To() != null) toUpdate.put("Assigned_To", new GenericType("'" + issue.getAssigned_To()+ "'"));
+			if (lvl.getUserLevel() != null) toUpdate.put("Registered_By", new GenericType("'" + lvl.getUserLevel()+ "'"));
+			if (lvl.getAccessPermissions() != null) toUpdate.put("Domain_Id", new GenericType("'" + lvl.getAccessPermissions()+ "'"));
 			
-			String updateQuery = SQLQueries.generateUpdateQuery("tbl_Issue", toUpdate, "[Id] = '" + issue.getId() + "'");
+			
+			String updateQuery = SQLQueries.generateUpdateQuery("tbl_User_Level", toUpdate, "[Id] = " + lvl.getId());
 			PreparedStatement ps = connection.prepareStatement(updateQuery);
 			int status = ps.executeUpdate();
 			System.out.println(status);
@@ -116,10 +110,10 @@ public class UserLevelDAO {
 	}
 	
 	
-	public static boolean deleteIssue(String id){
+	public static boolean deleteUserLevel(int id){
 		try {
 			Connection connection = SQLConnection.getAzureDBConnection();
-			String deleteQuery = SQLQueries.generateDeleteQuery("tbl_Issue", "[Id] = '" + id + "'");
+			String deleteQuery = SQLQueries.generateDeleteQuery("tbl_User_Level", "[Id] = " + id );
 			PreparedStatement ps = connection.prepareStatement(deleteQuery);
 			int status = ps.executeUpdate();
 			System.out.println(status);

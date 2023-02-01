@@ -2,37 +2,37 @@ package core.beans;
 
 public class UserLevel {
 	// Properties
-	private int Id;
-	private String Level;
-	private String Access_Levels;
+	private int id;
+	private String userLevel;
+	private String accessPermissions;
 	
 	
 	// Getter Methods
 	
 	public int getId() {
-		return this.Id;
+		return this.id;
 	}
 	
-	public String getLevel() {
-		return this.Level;
+	public String getUserLevel() {
+		return this.userLevel;
 	}
 	
-	public String getAccess_Levels() {
-		return this.Access_Levels;
+	public String getAccessPermissions() {
+		return this.accessPermissions;
 	}
 	
 	
 	// Setter Methods
-	public void setId(int Id) {
-		this.Id = Id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setLevel(String Level) {
-		this.Level = Level;
+	public void setUserLevel(String userLevel) {
+		this.userLevel = userLevel;
 	}
 
-	public void setAccess_Levels(String Access_Levels) {
-		this.Access_Levels = Access_Levels;
+	public void setAccessPermissions(String accessPermissions) {
+		this.accessPermissions = accessPermissions;
 	}
 
 	

@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.Date"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	import="java.util.Date, core.beans.*, core.dao.*, java.util.*" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +10,9 @@
 <!-- Bootstrap -->
 <title>Student Dashboard</title>
 <!-- Bootstrap core CSS -->
-<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <style>
 #student-homepage {
@@ -54,15 +55,18 @@
 
 .side-content {
 	margin-top: 30px;
-	padding-top: 30px;
+	padding-top: 15px;
 	text-align: center;
 	background-color: #ebf5f3;
 	border: 1px solid #9bbdb2;
 	box-shadow: 5px 10px #b6d4ca;
 }
 
-.side-content>h3 {
+.side-content>h5 {
 	color: #34665c;
+	font-weight:bold;
+	margin-bottom: 15px;
+	
 }
 
 .side-content>p {
@@ -109,8 +113,32 @@
 			</div>
 
 			<div class="col-sm-3 side-content">
-				<h3>Status of your current Issue</h3>
-				<p>There is no issue.......</p>
+				<h5>Status of your active Issues</h5>
+				<table class="table table-hover table-responsive-md btn-table tab">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Description</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<%
+						String uid = UserDetails.userId;
+						ArrayList<Issue> issues = IssueDAO.fetchIssues("[Registered_By] = '" + uid + "' AND Curr_Status <4");
+						for (Issue issue : issues) {
+							int id = issue.getId();
+							String description = issue.getDescription();
+							String desc = (description.length()<=15) ? description:(description.substring(0,15) + "....");
+							String status = Dimensions.statusMap.get(issue.getCurr_Status()).getName();
+							out.print("<tr> <th>" + id + "</th> <td>" + desc + "</td> <td>" + status
+							+ "</td> </tr>");
+
+						}
+						%>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		<div class="down-content">
@@ -127,8 +155,10 @@
 
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 	<!-- Plugin JavaScript -->
 	<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>

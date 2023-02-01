@@ -6,7 +6,7 @@ public class IssueLogs {
 	private 	int 			Issue_Id;
 	private 	int 			Status_Id;
 	private 	String 			Doer_Id;
-	private 	String 			Doer_Level;
+	private 	int 			Doer_Level;
 	private 	LocalDateTime 	Raised_Time;
 	
 	
@@ -24,7 +24,7 @@ public class IssueLogs {
 		return this.Doer_Id;
 	}
 	
-	public String getDoer_Level() {
+	public int getDoer_Level() {
 		return this.Doer_Level;
 	}
 	
@@ -47,7 +47,7 @@ public class IssueLogs {
 		this.Doer_Id = Doer_Id;
 	}
 	
-	public void setDoer_Level(String Doer_Level) {
+	public void setDoer_Level(int Doer_Level) {
 		this.Doer_Level = Doer_Level;
 	}
 	
