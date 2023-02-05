@@ -57,16 +57,11 @@ public class MessagesDAO {
 			Connection connection = SQLConnection.getAzureDBConnection();
 			HashMap<String, GenericType> toInsert = new HashMap<String, GenericType>();
 
-			if (message.getIssue_Id() != 0)
-				toInsert.put("Issue_Id", new GenericType(message.getIssue_Id()));
-			if (message.getMessage() != null)
-				toInsert.put("Message", new GenericType("'" + message.getMessage() + "'"));
-			if (message.getMessager_Id() != null)
-				toInsert.put("Messager_Id", new GenericType("'" + message.getMessager_Id() + "'"));
-			if (message.getMessager_Level() != 0)
-				toInsert.put("Messager_Level", new GenericType(message.getMessager_Level()));
-			if (message.getMessgae_Time() != null)
-				toInsert.put("Messgae_Time", new GenericType("' " + message.getMessgae_Time().toString().substring(0, 19) + " '"));
+			toInsert.put("Issue_Id", new GenericType(message.getIssue_Id()));
+			toInsert.put("Message", new GenericType("'" + message.getMessage() + "'"));
+			toInsert.put("Messager_Id", new GenericType("'" + message.getMessager_Id() + "'"));
+			toInsert.put("Messager_Level", new GenericType(message.getMessager_Level()));
+			toInsert.put("Messgae_Time", new GenericType("' " + LocalDateTime.now().toString().substring(0, 19) + " '"));
 
 			String insertQuery = SQLQueries.generateInsertQuery("tbl_Messages", toInsert);
 			PreparedStatement ps = connection.prepareStatement(insertQuery);

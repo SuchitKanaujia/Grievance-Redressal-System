@@ -109,6 +109,7 @@ public class IssueDAO {
 				toUpdate.put("Assigned_To", new GenericType("'" + issue.getAssigned_To() + "'"));
 
 			String updateQuery = SQLQueries.generateUpdateQuery("tbl_Issue", toUpdate, "[Id] = " + issue.getId());
+			System.out.println(updateQuery);
 			PreparedStatement ps = connection.prepareStatement(updateQuery);
 			int status = ps.executeUpdate();
 			System.out.println(status);

@@ -34,7 +34,7 @@
 		issue.setDomain_Id(domainId);
 		issue.setDescription(desc);
 		issue.setRegistered_By(UserDetails.userId);
-		int issueId = IssueDAO.insertIssue(issue);
+		int issueId = issue.add();
 		if (issueId > 0) {
 			out.print("<p style=\"color:green;\"><b>Issue raised Successfully!!</b></p> <br> "
 			+ "<p style=\"color:green;\">Your Issue Id is: " + issueId + " </p>");

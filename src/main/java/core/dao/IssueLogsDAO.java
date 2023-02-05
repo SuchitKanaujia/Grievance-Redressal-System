@@ -51,16 +51,12 @@ public class IssueLogsDAO {
 			Connection connection = SQLConnection.getAzureDBConnection();
 			HashMap<String, GenericType> toInsert = new HashMap<String, GenericType>();
 
-			if (log.getIssue_Id() != 0)
-				toInsert.put("Issue_Id", new GenericType(log.getIssue_Id()));
-			if (log.getStatus_Id() != 0)
-				toInsert.put("Status_Id", new GenericType(log.getStatus_Id()));
-			if (log.getDoer_Id() != null)
-				toInsert.put("Doer_Id", new GenericType("'" + log.getDoer_Id() + "'"));
-			if (log.getDoer_Level() != 0)
-				toInsert.put("Doer_Level", new GenericType(log.getDoer_Level()));
+			toInsert.put("Issue_Id", new GenericType(log.getIssue_Id()));
+			toInsert.put("Status_Id", new GenericType(log.getStatus_Id()));
+			toInsert.put("Doer_Id", new GenericType("'" + log.getDoer_Id() + "'"));
+			toInsert.put("Doer_Level", new GenericType(log.getDoer_Level()));
 			toInsert.put("Raised_Time",
-					new GenericType("' " + log.getRaised_Time().toString().substring(0, 19) + " '"));
+					new GenericType("' " + LocalDateTime.now().toString().substring(0, 19) + " '"));
 
 			String insertQuery = SQLQueries.generateInsertQuery("tbl_Issue_Logs", toInsert);
 			System.out.println(insertQuery);

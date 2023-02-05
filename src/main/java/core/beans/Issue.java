@@ -2,6 +2,8 @@ package core.beans;
 
 import java.util.*;
 import core.dao.*;
+import core.globals.UserDetails;
+
 import java.time.LocalDateTime;
 
 public class Issue {
@@ -75,15 +77,42 @@ public class Issue {
 		return log.getRaised_Time();
 	}
 
-	public boolean add() {
+	public int add() {
 		try {
-			IssueDAO.insertIssue(this);
+			int id = IssueDAO.insertIssue(this);
 			IssueLogs log = new IssueLogs();
 			log.setIssue_Id(this.getId());
 			log.setStatus_Id(1);
 			log.setDoer_Id(this.getRegistered_By());
 			log.setDoer_Level(4);
 			log.setRaised_Time(LocalDateTime.now());
+			IssueLogsDAO.insertIssueLog(log);
+			return id;
+		} catch (Exception ex) {
+			System.err.println(ex);
+			return -1;
+		}
+	}
+	
+	
+	//Some static methods
+	
+	public static ArrayList<Issue> fetchAllIssuesOfStudent(String id) {
+		return IssueDAO.fetchIssues("Registered_By = '" + id + "'");
+	}
+
+	public static boolean assign(int issueId, String assignedTo, String doerId, int doerLevel) {
+		try {
+			Issue issue = IssueDAO.fetchIssue(issueId);
+			issue.setCurr_Status(2);
+			issue.setAssigned_To(assignedTo);
+			IssueDAO.updateIssue(issue);
+
+			IssueLogs log = new IssueLogs();
+			log.setIssue_Id(issue.getId());
+			log.setStatus_Id(2);
+			log.setDoer_Id(doerId);
+			log.setDoer_Level(doerLevel);
 			IssueLogsDAO.insertIssueLog(log);
 		} catch (Exception ex) {
 			System.err.println(ex);
@@ -92,4 +121,57 @@ public class Issue {
 		return true;
 	}
 
+	public static boolean startWorking(int issueId) {
+		try {
+			Issue issue = IssueDAO.fetchIssue(issueId);
+			issue.setCurr_Status(3);
+			IssueDAO.updateIssue(issue);
+			IssueLogs log = new IssueLogs();
+			log.setIssue_Id(issueId);
+			log.setStatus_Id(3);
+			log.setDoer_Id(UserDetails.userId);
+			log.setDoer_Level(3);
+			IssueLogsDAO.insertIssueLog(log);
+		} catch (Exception ex) {
+			System.err.println(ex);
+			return false;
+		}
+		return true;
+	}
+
+	public static boolean resolve(int issueId) {
+		try {
+			Issue issue = IssueDAO.fetchIssue(issueId);
+			issue.setCurr_Status(4);
+			IssueDAO.updateIssue(issue);
+			IssueLogs log = new IssueLogs();
+			log.setIssue_Id(issueId);
+			log.setStatus_Id(4);
+			log.setDoer_Id(UserDetails.userId);
+			log.setDoer_Level(UserDetails.userLevelId);
+			IssueLogsDAO.insertIssueLog(log);
+		} catch (Exception ex) {
+			System.err.println(ex);
+			return false;
+		}
+		return true;
+	}
+
+	public static boolean reject(int issueId) {
+		try {
+			Issue issue = IssueDAO.fetchIssue(issueId);
+			issue.setCurr_Status(5);
+			IssueDAO.updateIssue(issue);
+			IssueLogs log = new IssueLogs();
+			log.setIssue_Id(issueId);
+			log.setStatus_Id(5);
+			log.setDoer_Id(UserDetails.userId);
+			log.setDoer_Level(UserDetails.userLevelId);
+			IssueLogsDAO.insertIssueLog(log);
+		} catch (Exception ex) {
+			System.err.println(ex);
+			return false;
+		}
+		return true;
+	}
 }

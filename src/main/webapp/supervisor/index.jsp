@@ -81,7 +81,7 @@ th {
 								String status = Dimensions.statusMap.get(issue.getCurr_Status()).getName();
 								String time = issue.getRegTime().toString().substring(0, 10);
 								//String time = "ddmmyyyy";
-								out.print("<tr> <th>" + index + 1 + "</th> <td>" + id + "</td> <td>" + description + "</td> <td> " + time
+								out.print("<tr> <th>" + (index + 1) + "</th> <td>" + id + "</td> <td>" + description + "</td> <td> " + time
 								+ " </td> <td>" + status + "</td> <td>" + studentIds.get(index) + "</td> <td>"
 								+ nameHash.get(studentIds.get(index)) + "</td> </tr>");
 								
