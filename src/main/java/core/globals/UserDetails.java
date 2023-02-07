@@ -6,7 +6,6 @@ public class UserDetails {
 
 	public static String userId = "";
 	public static String userName = "";
-	public static UserLevel userLevel = null;
 	public static int userLevelId = 0;
 	public static Admin admin = null;
 	public static Authority authority = null;
@@ -14,8 +13,7 @@ public class UserDetails {
 	public static Warden warden = null;
 	public static Student student = null;
 
-	public static void fillBasicUserInfo(UserLevel uLevel, Authority authorityObj) {
-		userLevel = uLevel;
+	public static void fillBasicUserInfo(Authority authorityObj) {
 		userLevelId = 1;
 		userId = authorityObj.getEmpId();
 		userName = authorityObj.getFirstName() + " "
@@ -24,8 +22,7 @@ public class UserDetails {
 		authority = authorityObj;
 	}
 
-	public static void fillBasicUserInfo(UserLevel uLevel, Warden wardenObj) {
-		userLevel = uLevel;
+	public static void fillBasicUserInfo(Warden wardenObj) {
 		userLevelId = 2;
 		userId = wardenObj.getEmpId();
 		userName = wardenObj.getFirstName() + " " + (wardenObj.getMidName() == null ? "" : wardenObj.getMidName() + " ")
@@ -33,8 +30,7 @@ public class UserDetails {
 		warden = wardenObj;
 	}
 
-	public static void fillBasicUserInfo(UserLevel uLevel, Supervisor supervisorObj) {
-		userLevel = uLevel;
+	public static void fillBasicUserInfo(Supervisor supervisorObj) {
 		userLevelId = 3;
 		userId = supervisorObj.getEmpId();
 		userName = supervisorObj.getFirstName() + " "
@@ -43,8 +39,7 @@ public class UserDetails {
 		supervisor = supervisorObj;
 	}
 
-	public static void fillBasicUserInfo(UserLevel uLevel, Student studentObj) {
-		userLevel = uLevel;
+	public static void fillBasicUserInfo(Student studentObj) {
 		userLevelId = 4;
 		userId = studentObj.getRegNo();
 		userName = studentObj.getFirstName() + " "
@@ -52,8 +47,7 @@ public class UserDetails {
 		student = studentObj;
 	}
 
-	public static void fillBasicUserInfo(UserLevel uLevel, Admin adminObj) {
-		userLevel = uLevel;
+	public static void fillBasicUserInfo(Admin adminObj) {
 		userLevelId = 5;
 		userId = adminObj.getEmpId();
 		userName = adminObj.getFirstName() + " " + (adminObj.getMidName() == null ? "" : adminObj.getMidName() + " ")

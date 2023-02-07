@@ -26,7 +26,7 @@ public class Dimensions {
 		// Domains
 		domains = DomainDAO.fetchDomains(new String(""));
 		domainMap = new HashMap<String, Domain>();
-		for (Domain domain : domains) {
+		for (Domain domain : domains) { 
 			domainMap.put(domain.getId(), domain);
 		}
 

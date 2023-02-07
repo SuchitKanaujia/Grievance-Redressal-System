@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-import="core.beans.*, core.dao.*, core.globals.*, java.util.ArrayList"
+	import="core.beans.*, core.dao.*, core.globals.*, java.util.ArrayList"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -83,19 +83,21 @@ body {
 					</thead>
 
 					<tbody>
-					<% String uid = UserDetails.userId;
-					ArrayList<Issue> issues = IssueDAO.fetchIssues("[Registered_By] = '" + uid + "'");
-					for (Issue issue: issues) {
-						int id = issue.getId();
-						String domainName = Dimensions.domainMap.get(issue.getDomain_Id()).getName();
-						String description = issue.getDescription();
-						String status = Dimensions.statusMap.get(issue.getCurr_Status()).getName();
-						out.print("<tr> <th>" + id + "</th> <td>" + domainName + "</td> <td>" + description + "</td> <td> DD/MM/YYYY </td> <td>"
-						+ status + "</td> <td><button type=\"button\" class=\" btn btn-teal btn-rounded btn-md m-0\">More</button></td> </tr>");
-						
-					}
-					%>
-					
+						<%
+						String uid = UserDetails.userId;
+						ArrayList<Issue> issues = IssueDAO.fetchIssues("[Registered_By] = '" + uid + "'");
+						for (Issue issue : issues) {
+							int id = issue.getId();
+							String domainName = Dimensions.domainMap.get(issue.getDomain_Id()).getName();
+							String description = issue.getDescription();
+							String status = Dimensions.statusMap.get(issue.getCurr_Status()).getName();
+							out.print("<tr> <th>" + id + "</th> <td>" + domainName + "</td> <td>" + description
+							+ "</td> <td> DD/MM/YYYY </td> <td>" + status
+							+ "</td> <td><button type=\"button\" class=\" btn btn-teal btn-rounded btn-md m-0\" onClick=\"location.href = \'issue.jsp?issueId="
+							+ id + "\'\" >More</button></td> </tr>");
+						}
+						%>
+
 					</tbody>
 				</table>
 			</div>
@@ -108,7 +110,6 @@ body {
 
 	<!-- Including Footer -->
 	<%@include file="includes/footer.jsp"%>
-
 
 
 

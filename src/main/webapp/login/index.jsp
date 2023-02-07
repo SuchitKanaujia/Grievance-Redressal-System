@@ -14,9 +14,9 @@
 			String password = request.getParameter("password");
 			String userLevel = request.getParameter("user-level");
 			try {
-				UserLevel userLevelObj =  Dimensions.userLevelMap.get(Integer.parseInt(userLevel));
-				if(LoginModule.approveLogin(userLevelObj, userName, password)){
-					switch(userLevelObj.getId()){
+				//UserLevel userLevelObj =  Dimensions.userLevelMap.get(Integer.parseInt(userLevel));
+				if(LoginModule.approveLogin(Integer.parseInt(userLevel), userName, password)){
+					switch(Integer.parseInt(userLevel)){
 					case 2:
 						response.sendRedirect("../warden/");
 						break;

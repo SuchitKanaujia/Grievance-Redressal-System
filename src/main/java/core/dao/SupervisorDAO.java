@@ -64,4 +64,15 @@ public class SupervisorDAO {
 		}
 		return allSupervisors;
 	}
+	
+	public static Supervisor fetchSupervisor(String id){
+		return SupervisorDAO.fetchSupervisors("[Emp_Id] = \"" +  id + "\"").get(0);
+	}
+	
+	
+	public static void main(int args[]) {
+		String id = "JSP1054";
+		Supervisor sup = fetchSupervisors("[Emp_Id] = \"" +  id + "\"").get(0);
+		System.out.println(sup.getFirstName());
+	}
 }

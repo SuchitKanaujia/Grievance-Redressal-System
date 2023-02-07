@@ -7,22 +7,22 @@ import core.beans.*;
 import core.dao.*;
 
 public class LoginModule {
-	public static boolean approveLogin(UserLevel uLevel, String uName, String password) {
+	public static boolean approveLogin(int uLevelId, String uName, String password) {
 		try {
-			switch (uLevel.getId()) {
+			switch (uLevelId) {
 			case 1:
 				ArrayList<Authority> authority = AuthorityDAO
 						.fetchAuthorities("[Emp_Id] = '" + uName + "' AND [Password] = '" + password + "'");
 				if (authority.size() < 1)
 					return false;
-				UserDetails.fillBasicUserInfo(uLevel, authority.get(0));
+				UserDetails.fillBasicUserInfo(authority.get(0));
 				break;
 			case 3:
 				ArrayList<Supervisor> sup = SupervisorDAO
 						.fetchSupervisors("[Emp_Id] = '" + uName + "' AND [Password] = '" + password + "'");
 				if (sup.size() < 1)
 					return false;
-				UserDetails.fillBasicUserInfo(uLevel, sup.get(0));
+				UserDetails.fillBasicUserInfo(sup.get(0));
 				break;
 				
 			case 4:
@@ -30,14 +30,14 @@ public class LoginModule {
 						.fetchStudents("[Reg_No] = '" + uName + "' AND [Password] = '" + password + "'");
 				if (student.size() < 1)
 					return false;
-				UserDetails.fillBasicUserInfo(uLevel, student.get(0));
+				UserDetails.fillBasicUserInfo(student.get(0));
 				break;
 			case 5:
 				ArrayList<Admin> adminRecord = AdminDAO
 						.fetchAdmins("[Emp_Id] = '" + uName + "' AND [Password] = '" + password + "'");
 				if (adminRecord.size() < 1)
 					return false;
-				UserDetails.fillBasicUserInfo(uLevel, adminRecord.get(0));
+				UserDetails.fillBasicUserInfo(adminRecord.get(0));
 				break;
 			}
 		} catch (Exception ex) {
